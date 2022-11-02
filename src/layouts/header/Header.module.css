@@ -4,6 +4,7 @@
 }
 .FullName *{
     padding: 2px;
+    user-select: none;
 }
 .FirstName{
 
