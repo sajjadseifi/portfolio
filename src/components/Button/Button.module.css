@@ -1,0 +1,24 @@
+.Button{
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    margin: 0 5px;
+    transition: 0.3s;
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.Button:hover{
+    background-color: #313438;
+}
+
+.ButtonIcon {
+    padding: 0 2px;
+}
+
+.ButtonContnet{
+    color: #8f9091;
+    padding: 0 2px;
+    font-weight: bold;
+    font-size: 11px;
+}

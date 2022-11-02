@@ -1,0 +1,23 @@
+.Header{
+    display: flex;
+    align-items: center;
+}
+.FullName *{
+    padding: 2px;
+}
+.FirstName{
+
+}
+.LastName{
+    opacity: 0.9;
+}
+
+.Navigation{
+    flex: 1;
+    padding-left: 60px;
+    height: 100%;
+}
+
+.Social {
+
+}

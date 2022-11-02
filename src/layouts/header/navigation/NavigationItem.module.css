@@ -1,0 +1,43 @@
+.NavigationItem{
+    padding: 0 10px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.NavigationItem:hover{
+    color: #abf0dc;
+}
+.NavigationItem::before,
+.NavigationItem::after
+{
+    content: '';
+    font-weight: bold;
+    padding:0;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.NavigationItem::before{
+    content: '<';
+}
+
+.NavigationItem::after{
+    content: '>';
+}
+.ActiveItem.NavigationItem{
+    padding: 0 7px;
+}
+.ActiveItem.NavigationItem::before,
+.ActiveItem.NavigationItem::after
+{
+    opacity: 1;
+    padding: 0 3px;
+}
+.ActiveItem {
+    color: #0af5b2;
+}
+.NavigationItemLeft{
+
+}
+.NavigationItemRight{
+
+}
