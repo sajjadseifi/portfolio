@@ -1,0 +1,16 @@
+.NumberDescription{
+    display: flex; 
+    align-items: center;
+}
+
+.Number{
+    padding:0 3px;
+}
+
+.Description{
+    padding:0 3px;
+    font-size:10px;
+    display: inline-block;
+    max-width: 140px;
+    color: #5a5d61;
+}

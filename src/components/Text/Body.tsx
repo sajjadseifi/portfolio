@@ -6,12 +6,4 @@ interface BodyProps {
     children:any,
     size?:number
 }
-export const Body =(props:BodyProps)=>{
-    return <p 
-    style={{
-        color:BODY1,
-        fontSize:11,
-        fontWeight:'bold'
-    }}
-    className={style.Body}>{props.children}</p>
-}
+export const Body =(props:BodyProps)=> <p className={style.Body}>{props.children}</p>

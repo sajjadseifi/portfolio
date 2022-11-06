@@ -1,4 +1,9 @@
 .Layout{
     background-color: #2c2f33;
-    padding: 20px 100px;
+    padding: 20px 0;
+}
+.Layout > *{
+    
+    padding:  0 100px;
+
 }

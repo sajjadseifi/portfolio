@@ -1,0 +1,22 @@
+.Intro{
+    font-weight: normal;
+    margin: 5px 0;
+    color:#5a5d61 ;
+    font-size:13px;
+    font-weight: bold;
+}
+.IntroduceSection  p{
+    font-weight: normal;
+    font-size: 11px;
+    margin: 5px 0;
+    line-height: 17px;
+    text-align: justify;
+}
+.Title{
+    font-size: 32px;
+} 
+
+.SubTitle{
+    font-size: 22px;
+    font-style: italic;
+}

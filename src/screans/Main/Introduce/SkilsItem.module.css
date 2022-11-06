@@ -1,0 +1,39 @@
+.SkilsItem{
+    padding: 20px;
+}
+
+.SkilsItem:hover .Header {
+    color: #0af5b2;
+}
+.Header { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #efeff0;
+    transition: 0.3s;
+}
+
+.Header h3{
+    padding: 0;
+    margin: 0;
+}
+.SkilsItem .Content  p{
+    font-weight: normal;
+    font-size: 11px;
+    margin: 5px 0;
+}
+.Refrence{
+    margin-top: 20px;
+}
+.Refrence a{
+    text-decoration: none;
+    color: #efeff0a6;
+}
+
+.Refrence a.IsUrl {
+    text-decoration: underline;   
+}
+.Refrence a:hover {
+    color: #efeff0;
+    transition: 0.3s;
+}

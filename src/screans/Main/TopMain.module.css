@@ -1,0 +1,18 @@
+.TopMain{
+    display: flex;
+
+}
+.Wallpare{
+    min-width: 55%;
+    height: 500px;
+    background-color: #4a4f55;
+}
+.ExpericeContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 90px;
+}
+.Description{
+    margin-top: 100px;
+    padding-left:100px;
+}
