@@ -15,8 +15,8 @@ export const TopMain = ({}) => {
                         <div>
                             <Tag content='Front-End Developer'/>
                         </div>
-                            <Subject>Talk Is Cheap. <br/> Show Me The Code</Subject>
-                            <Body>design and code butifully simple things, and I love want to do .</Body>
+                            <Subject>Talk Is Cheap.<br/>Show Me The Code</Subject>
+                            <Body>design and code butifully simple things, and I love want to do.</Body>
                         </div>
                         <div style={{marginTop:60}}>
                             <Link>LET'S CHAT!</Link>

@@ -1,0 +1,34 @@
+.Navigation{
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+}
+
+.NavItem{
+    flex: 1;
+    margin: 0;
+    height: 100%;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.NavItem:hover { 
+    opacity: 1;
+}
+.BorderBottom{
+    height: 1px;
+    width: 100%;
+    background-color:#3a3b3f ;
+    position: relative;
+}
+.LinearLine{
+    height: 1px;
+    background-color:#03e8a8 ;
+    position: absolute;
+    transition: 0.3s;
+    width: 33%;
+    left: 0%;
+}
