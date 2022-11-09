@@ -5,7 +5,7 @@ import style from './Navigation.module.css'
 interface NavigationProps {
     items : ITestimonial[]
     renderMethod : (props:any)=>any
-    onSelect ?: (index:number) => {}
+    onSelect ?: (index:number) => any
 }
 
 export const Navigation : FC<NavigationProps> = ({items,renderMethod:Redner,onSelect}) =>{
@@ -25,12 +25,19 @@ export const Navigation : FC<NavigationProps> = ({items,renderMethod:Redner,onSe
     return (
         <div className={style.NavigationContainer}>
             <ul className={style.Navigation}>
-                {items.map((item,index)=>(
-                    <li key={index} className={style.NavItem}onClick={()=>setActive(index)}>
-                        <Redner />
-                        d
-                    </li>
-                ))}
+                {items.map((item,index)=>{
+                    const activeClass = index === active ? style.Active:''
+                    const itemClass = [style.NavItem,activeClass].join(' ')
+                    return (
+                        <li 
+                            key={index} 
+                            className={itemClass}
+                            onClick={()=>setActive(index)}
+                        >
+                            <Redner  {...item} />
+                        </li>
+                    )
+                })}
             </ul>
             <div className={style.BorderBottom}>
                 <div className={style.LinearLine} style={lineStyle}></div>

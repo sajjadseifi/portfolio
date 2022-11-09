@@ -1,0 +1,22 @@
+.Social{
+    display: flex;
+}
+.Item{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.Item a{
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: 0.1s;
+}
+.Item a:hover{
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 1;
+}
+.Username{
+    margin: 0 5px;
+}

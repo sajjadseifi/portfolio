@@ -1,0 +1,32 @@
+.TestimonalItem{
+    font-size: 12px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.AvatarContainer{
+
+}
+.AvatarContainer img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.Details{
+    padding: 0 20px;
+}
+.FullName{
+
+}
+.Space{
+    padding: 0 5px;
+}
+.Position{
+    color : #737577;
+}
+.Team{
+    color: #0af5b2;
+}
