@@ -4,6 +4,9 @@
     display: flex;
 
 }
+.Footer .Wrapper {
+    padding: 40px;
+}
 .Information{
     min-width: 300px;
 }

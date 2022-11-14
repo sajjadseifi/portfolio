@@ -1,0 +1,26 @@
+.ContactUs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.TitleContainer{
+    margin: 0 10px;
+    text-align: center;
+}
+.Title{
+    font-size: 28px;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ContactContainer{
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+
+.ContactUs > div {
+    flex: 1;
+}
