@@ -7,7 +7,7 @@ import { Navigation } from './header/navigation/Navigatin'
 export const Footer = () => {
     return (
         <>
-        <div className={style.Footer}>
+        <div className={[style.Footer,style.Wrapper]}>
             <div className={style.ContactUs}>
                     <ContactUs/>
             </div>
