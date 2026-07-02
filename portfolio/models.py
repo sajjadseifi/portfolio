@@ -339,17 +339,37 @@ class Education(OrderedModel):
 from django.db import models
 
 
+from django.db import models
+
+
+class InquiryStatus(models.TextChoices):
+    UNSEEN = "unseen", "دیده نشده"
+    REVIEWING = "reviewing", "در حال بررسی"
+    ANSWERED = "answered", "بررسی شده و پاسخ داده شده"
+    REVIEWED_NO_RESPONSE = "reviewed_no_response", "بررسی شده و پاسخ نداده شده"
+
+
 class CollaborationInquiry(models.Model):
     name = models.CharField(max_length=120)
     email = models.EmailField()
     message = models.TextField()
 
+    status = models.CharField(
+        max_length=30,
+        choices=InquiryStatus.choices,
+        default=InquiryStatus.UNSEEN
+    )
+
+    response = models.TextField(
+        blank=True,
+        help_text="پاسخی که برای این درخواست ارسال شده یا قرار است ارسال شود"
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
-    is_read = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-created_at"]
-        verbose_name = "دعوت به همکاری ها"
+        verbose_name = "دعوت به همکاری"
         verbose_name_plural = "دعوت به همکاری ها"
 
     def __str__(self):
@@ -360,8 +380,18 @@ class Feedback(models.Model):
     name = models.CharField(max_length=120, blank=True)
     message = models.TextField()
 
+    status = models.CharField(
+        max_length=30,
+        choices=InquiryStatus.choices,
+        default=InquiryStatus.UNSEEN
+    )
+
+    response = models.TextField(
+        blank=True,
+        help_text="پاسخی که برای این فیدبک ثبت شده"
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
-    is_read = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-created_at"]

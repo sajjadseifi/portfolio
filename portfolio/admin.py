@@ -106,15 +106,23 @@ class ProjectAdmin(BaseAdmin):
     
 
 
+from django.contrib import admin
+from .models import CollaborationInquiry, Feedback
+
+
 @admin.register(CollaborationInquiry)
 class CollaborationInquiryAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "created_at", "is_read")
-    list_filter = ("is_read", "created_at")
-    search_fields = ("name", "email", "message")
+    list_display = ("name", "email", "status", "created_at")
+    list_filter = ("status", "created_at")
+    search_fields = ("name", "email", "message", "response")
+    list_editable = ("status",)
+    readonly_fields = ("created_at",)
 
 
 @admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ("name", "created_at", "is_read")
-    list_filter = ("is_read", "created_at")
-    search_fields = ("name", "message")
+    list_display = ("name", "status", "created_at")
+    list_filter = ("status", "created_at")
+    search_fields = ("name", "message", "response")
+    list_editable = ("status",)
+    readonly_fields = ("created_at",)
