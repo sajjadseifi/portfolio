@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>
+      {% block title %}
+        Sajjad Seifi
+      {% endblock %}
+    </title>
+
+    <meta name="description"
+      content="{% block description %}
+        وب‌سایت شخصی سجاد سیفی
+      {% endblock %}" />
+
+    <meta name="keywords"
+      content="{% block keywords %}
+        Sajjad Seifi, Django, Python, Backend Developer
+      {% endblock %}" />
+
+    <meta name="author" content="Sajjad Seifi" />
+
+    <link rel="icon" href="{% static 'icons/favicon.png' %}" />
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="{% static 'fonts/font-face.css' %}" />
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}" />
+
+    <script>
+      ;(function () {
+        const theme = localStorage.getItem('theme')
+      
+        if (theme) {
+          document.documentElement.classList.toggle('dark', theme === 'dark')
+        } else {
+          document.documentElement.classList.toggle('dark', window.matchMedia('(prefers-color-scheme: dark)').matches)
+        }
+      })()
+    </script>
+    {% block extra_css %}
+    {% endblock %}
+  </head>
+
+  <body class="relative min-h-screen overflow-x-hidden bg-zinc-100 text-zinc-900 transition-colors duration-300 dark:bg-zinc-950 dark:text-zinc-100">
+    {% if messages %}
+      <div class="fixed bottom-6 right-6 z-50 space-y-3">
+        {% for message in messages %}
+          <div class="px-6 py-4 rounded-xl bg-emerald-500 text-white shadow-xl">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- ================= Background ================= -->
+
+    <div class="pointer-events-none fixed inset-0 -z-50 overflow-hidden">
+      <div class="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-violet-600/20 blur-[150px]"></div>
+
+      <div class="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-[180px]"></div>
+    </div>
+
+    <!-- ================= Layout ================= -->
+
+    <div class="relative flex min-h-screen flex-col">
+      <!-- Navbar -->
+
+      {% block navbar %}
+        {% include 'components/navbar.html' %}
+      {% endblock %}
+
+      <!-- Main -->
+
+      <main class="flex-1">
+        {% block content %}
+
+        {% endblock %}
+      </main>
+
+      <!-- Footer -->
+
+      {% block footer %}
+        {% include 'components/footer.html' %}
+      {% endblock %}
+    </div>
+
+    <!-- ================= Scripts ================= -->
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+
+    <script defer src="{% static 'js/alpinejs.js' %}"></script>
+
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/tailwindcss.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block extra_js %}
+
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,351 @@
+{% load static %}
+<div class="container mx-auto px-6 max-w-6xl">
+  <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 border-t border-white/10 pt-12">
+
+    <!-- LEFT -->
+    <div class="space-y-6 lg:pl-8 lg:border-l lg:border-white/10">
+
+      <!-- Experience -->
+      <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-6">
+      
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-fuchsia-500 shadow-[0_0_12px_rgba(217,70,239,0.8)]"></span>
+            Experience
+          </h2>
+        </div>
+      
+        <div class="space-y-5">
+      
+          {% for exp in experiences %}
+      
+          <!-- ITEM -->
+          <div class="group flex gap-4">
+      
+            <!-- Logo -->
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+      
+              {% if exp.company_logo %}
+                <img src="{{ exp.company_logo.url }}"
+                     class="w-full h-full object-cover"
+                     alt="{{ exp.company }}">
+              {% else %}
+      
+              <!-- SVG placeholder -->
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   class="w-6 h-6 text-fuchsia-400"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   stroke="currentColor">
+      
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M3 21h18M9 8h6M9 12h6M9 16h6M4 21V7a2 2 0 012-2h12a2 2 0 012 2v14"/>
+              </svg>
+      
+              {% endif %}
+      
+            </div>
+      
+      
+            <!-- Content -->
+            <div class="flex-1 relative pr-5">
+      
+              <!-- timeline dot -->
+              <span class="absolute right-0 top-1.5 w-2 h-2 rounded-full bg-fuchsia-400"></span>
+      
+              <!-- title -->
+              <div class="flex items-center justify-between gap-3">
+      
+                <div class="text-sm text-gray-200 font-semibold">
+                  {{ exp.title }}
+                </div>
+      
+                <div class="text-[11px] text-gray-500 whitespace-nowrap">
+                  {{ exp.start_date|date:"Y" }}
+                  —
+                  {% if exp.is_current %}
+                    Present
+                  {% else %}
+                    {{ exp.end_date|date:"Y" }}
+                  {% endif %}
+                </div>
+      
+              </div>
+      
+      
+              <!-- company -->
+              <div class="text-xs text-gray-400 mt-1 flex flex-wrap items-center gap-2">
+      
+                <span>{{ exp.company }}</span>
+      
+                {% if exp.location %}
+                <span>• {{ exp.location }}</span>
+                {% endif %}
+      
+                <span class="text-fuchsia-300 text-[11px] bg-fuchsia-500/10 border border-fuchsia-500/20 px-2 py-0.5 rounded">
+                  {{ exp.get_employment_type_display }}
+                </span>
+      
+              </div>
+      
+      
+              <!-- short description -->
+              {% if exp.short_description %}
+              <div class="text-xs text-gray-400 mt-2 leading-relaxed">
+                {{ exp.short_description }}
+              </div>
+              {% endif %}
+      
+      
+              <!-- technologies + skills -->
+              {% if exp.technologies.count or exp.skills.count %}
+              <div class="flex flex-wrap gap-2 mt-3">
+      
+                {% for tech in exp.technologies.all %}
+                <span class="text-[11px] text-white bg-white/5 border border-white/10 px-2 py-0.5 rounded">
+                  {{ tech.title }}
+                </span>
+                {% endfor %}
+      
+                {% for skill in exp.skills.all %}
+                <span class="text-[11px] text-purple-300 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded">
+                  {{ skill.title }}
+                </span>
+                {% endfor %}
+      
+              </div>
+              {% endif %}
+      
+      
+              <!-- EXPAND SECTION -->
+              {% if exp.description %}
+              <div class="max-h-0 overflow-hidden opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-500 ease-in-out">
+      
+                <div class="pt-4">
+      
+                  <div class="h-px bg-white/5 mb-4"></div>
+      
+                  <div class="text-xs text-gray-400 leading-relaxed">
+                    {{ exp.description }}
+                  </div>
+      
+                </div>
+      
+              </div>
+              {% endif %}
+      
+            </div>
+      
+          </div>
+      
+          {% if not forloop.last %}
+          <div class="h-px bg-white/5"></div>
+          {% endif %}
+      
+          {% endfor %}
+      
+        </div>
+      </div>
+
+      
+      <!-- Education -->
+      <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-6">
+      
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.8)]"></span>
+            Education
+          </h2>
+        </div>
+      
+        <div class="space-y-5">
+        
+            {% for edu in educations %}
+            
+            <div class="group flex gap-4">
+            
+              <!-- Logo -->
+              <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+            
+                {% if edu.logo %}
+                  <img src="{{ edu.logo.url }}" class="w-full h-full object-cover" alt="{{ edu.institution }}">
+                {% else %}
+            
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-6 h-6 text-purple-400"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+            
+                  <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M12 14l9-5-9-5-9 5 9 5z"/>
+                </svg>
+            
+                {% endif %}
+            
+              </div>
+            
+            
+              <!-- Content -->
+              <div class="flex-1 relative pr-5">
+            
+                <span class="absolute right-0 top-1.5 w-2 h-2 rounded-full bg-purple-400"></span>
+            
+                <div class="text-sm text-gray-200 font-semibold">
+                  {{ edu.degree }}
+                  {% if edu.field_of_study %}
+                  — {{ edu.field_of_study }}
+                  {% endif %}
+                </div>
+            
+                <div class="text-xs text-gray-400 mt-1">
+                  {{ edu.institution }}
+                  •
+                  {{ edu.start_date|date:"Y" }}
+            
+                  {% if edu.end_date %}
+                  — {{ edu.end_date|date:"Y" }}
+                  {% else %}
+                  — Present
+                  {% endif %}
+                </div>
+            
+                <div class="mt-2">
+                  <span class="text-[11px] px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                    {{ edu.get_education_type_display }}
+                  </span>
+                </div>
+            
+            
+                <!-- EXPAND DESCRIPTION -->
+                {% if edu.description %}
+                <div class="max-h-0 overflow-hidden opacity-0 group-hover:max-h-[200px] group-hover:opacity-100 transition-all duration-500">
+            
+                  <div class="text-xs text-gray-400 mt-2 leading-relaxed">
+                    {{ edu.description }}
+                  </div>
+            
+                </div>
+                {% endif %}
+            
+              </div>
+            
+            </div>
+            
+            {% if not forloop.last %}
+            <div class="h-px bg-white/5"></div>
+            {% endif %}
+            
+            {% endfor %}
+        
+        </div>
+      </div>
+
+
+    </div>
+
+      
+      <!-- RIGHT -->
+      <div class="rounded-2xl p-6">
+        <!-- header -->
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.8)]"></span>
+            Projects
+          </h2>
+        </div>
+      
+        <div class="space-y-4">
+          {% for project in projects %}
+          
+          <!-- PROJECT CARD -->
+          <div class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all duration-500 hover:border-purple-500/40 hover:bg-white/[0.05]">
+            
+            <!-- glow (فقط هنگام هاور) -->
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.15),transparent_70%)]"></div>
+      
+            <div class="relative z-10 p-5">
+              <div class="flex items-start gap-4">
+      
+                <!-- LOGO (جدید) -->
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+                  {% if project.logo %}
+                    <img src="{{ project.logo.url }}" class="w-full h-full object-cover" alt="{{ project.title }}">
+                  {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                    </svg>
+                  {% endif %}
+                </div>
+      
+                <!-- CONTENT -->
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-sm font-bold text-gray-100">{{ project.title }}</h3>
+                    
+                    {% if project.is_featured %}
+                    <span class="text-[9px] uppercase tracking-wider text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">Featured</span>
+                    {% endif %}
+                  </div>
+      
+                  <p class="text-xs text-gray-400 mt-1 leading-relaxed">{{ project.short_description }}</p>
+      
+                  <!-- Tech badges (compact) -->
+                  {% if project.technologies.count %}
+                  <div class="flex flex-wrap gap-1.5 mt-3">
+                    {% for tech in project.technologies.all %}
+                    <span class="text-[10px] text-gray-400 bg-white/5 px-2 py-0.5 rounded border border-white/5">{{ tech.title }}</span>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+      
+              <!-- EXPAND SECTION -->
+              <div class="max-h-0 overflow-hidden opacity-0 group-hover:max-h-[1000px] group-hover:opacity-100 transition-all duration-700 ease-in-out">
+                
+                <div class="border-t border-white/5 my-4 pt-4 space-y-4">
+                  
+                  {% if project.description %}
+                  <p class="text-xs text-gray-400 leading-relaxed">{{ project.description }}</p>
+                  {% endif %}
+      
+                  {% if project.skills.count %}
+                  <div class="flex flex-wrap gap-1.5">
+                    {% for skill in project.skills.all %}
+                    <span class="text-[10px] text-purple-300 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/10">{{ skill.title }}</span>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+      
+                  <!-- Links -->
+                  <div class="flex items-center gap-3 pt-2">
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" target="_blank" class="text-[10px] text-gray-400 hover:text-white transition">GitHub</a>
+                    {% endif %}
+                    {% if project.live_url %}
+                    <a href="{{ project.live_url }}" target="_blank" class="text-[10px] text-purple-400 hover:text-purple-300 transition">Live Demo</a>
+                    {% endif %}
+                  </div>
+      
+                  <!-- Image (فقط اگر موجود باشد) -->
+                  {% if project.cover %}
+                  <img src="{{ project.cover.url }}" class="w-full h-40 object-cover rounded-lg border border-white/5" alt="{{ project.title }}">
+                  {% endif %}
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+
+  </div>
+</div>

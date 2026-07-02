@@ -1,0 +1,81 @@
+{% load static %}
+
+<div class="w-full relative z-10 max-w-7xl mx-auto">
+  <!-- Header -->
+  <div class="mb-16 text-center">
+    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-sm text-gray-300 mb-6">
+      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+      Available for collaboration
+    </span>
+
+    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white mb-5">Get In Touch</h2>
+
+    <p class="text-gray-400 text-lg max-w-2xl mx-auto leading-8">Whether you have a project idea, collaboration opportunity, or feedback about my work — feel free to reach out.</p>
+  </div>
+
+  <!-- Full Width Layout -->
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+    <!-- Collaboration Form -->
+    <div class="relative overflow-hidden rounded-[2rem] border border-cyan-500/10 bg-gradient-to-br from-cyan-500/[0.06] via-cyan-500/[0.02] to-transparent p-8 md:p-10">
+      <div class="relative">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="w-14 h-14 rounded-2xl bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-4 4v-4z" />
+            </svg>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-white">Collaboration</h3>
+            <p class="text-cyan-100/60 text-sm mt-1">Let's build something meaningful together.</p>
+          </div>
+        </div>
+
+        <form method="POST" action="{% url 'send_collaboration' %}" class="space-y-5">
+          {% csrf_token %}
+
+          <div class="grid md:grid-cols-2 gap-5">
+            <input type="text" name="name" required placeholder="Your Name" class="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-white placeholder:text-gray-500 outline-none focus:border-cyan-400/40" />
+
+            <input type="email" name="email" required placeholder="Your Email" class="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-white placeholder:text-gray-500 outline-none focus:border-cyan-400/40" />
+          </div>
+
+          <textarea name="message" rows="6" required placeholder="Tell me about your project..." class="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-white placeholder:text-gray-500 outline-none resize-none focus:border-cyan-400/40"></textarea>
+
+          <button type="submit" class="w-full md:w-auto px-8 py-4 rounded-2xl bg-cyan-400 text-black font-semibold hover:bg-cyan-300 transition-all">Send Inquiry</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Feedback Form -->
+    <div class="relative overflow-hidden rounded-[2rem] border border-purple-500/10 bg-gradient-to-br from-purple-500/[0.07] via-purple-500/[0.02] to-transparent p-8 md:p-10">
+      <!-- subtle background -->
+      <div class="absolute bottom-0 left-0 w-72 h-72 bg-fuchsia-500/10 blur-3xl rounded-full pointer-events-none"></div>
+
+      <div class="relative">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="w-14 h-14 rounded-2xl bg-purple-400/10 border border-purple-400/20 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l2.037 6.26a1 1 0 00.95.69h6.584c.969 0 1.371 1.24.588 1.81l-5.327 3.87a1 1 0 00-.364 1.118l2.037 6.26c.3.921-.755 1.688-1.54 1.118l-5.327-3.87a1 1 0 00-1.176 0l-5.327 3.87c-.784.57-1.838-.197-1.539-1.118l2.037-6.26a1 1 0 00-.364-1.118L.878 11.687c-.783-.57-.38-1.81.588-1.81h6.584a1 1 0 00.95-.69l2.049-6.26z" />
+            </svg>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-white">Feedback</h3>
+            <p class="text-purple-100/60 text-sm mt-1">Suggestions, thoughts, or portfolio feedback.</p>
+          </div>
+        </div>
+
+        <form method="POST" action="{% url 'send_feedback' %}" class="space-y-5">
+          {% csrf_token %}
+
+          <input type="text" name="name" placeholder="Your Name (Optional)" class="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-white placeholder:text-gray-500 outline-none focus:border-purple-400/40" />
+
+          <textarea name="message" rows="8" required placeholder="Write your feedback..." class="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-white placeholder:text-gray-500 outline-none resize-none focus:border-purple-400/40"></textarea>
+
+          <button type="submit" class="w-full md:w-auto px-8 py-4 rounded-2xl bg-purple-500 text-white font-semibold hover:bg-purple-400 transition-all">Send Feedback</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

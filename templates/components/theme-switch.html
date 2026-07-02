@@ -1,0 +1,74 @@
+<div x-data="themeSwitcher()" x-init="init()" class=" z-50">
+    <button
+        @click="toggle()"
+        type="button"
+        aria-label="Toggle Theme"
+        class="group relative flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl transition-all duration-500 hover:border-violet-500/50 hover:bg-violet-500/10 hover:shadow-violet-500/20 active:scale-95">
+
+        <!-- Sun Icon (Light Mode) -->
+        <svg
+            x-show="theme === 'light'"
+            x-cloak
+            x-transition:enter="transition ease-out duration-300 transform"
+            x-transition:enter-start="opacity-0 rotate-90 scale-0"
+            x-transition:enter-end="opacity-100 rotate-0 scale-100"
+            x-transition:leave="transition ease-in duration-200 transform"
+            x-transition:leave-start="opacity-100 rotate-0 scale-100"
+            x-transition:leave-end="opacity-0 -rotate-90 scale-0"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6 text-amber-400">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21m8.25-9H18m-12 0H3.75m13.364-6.364l-1.591 1.591M8.227 15.773l-1.591 1.591m0-10.728l1.591 1.591m8.546 8.546l1.591 1.591M12 16.5A4.5 4.5 0 1012 7.5a4.5 4.5 0 000 9z" />
+        </svg>
+
+        <!-- Moon Icon (Dark Mode) -->
+        <svg
+            x-show="theme === 'dark'"
+            x-cloak
+            x-transition:enter="transition ease-out duration-300 transform"
+            x-transition:enter-start="opacity-0 -rotate-90 scale-0"
+            x-transition:enter-end="opacity-100 rotate-0 scale-100"
+            x-transition:leave="transition ease-in duration-200 transform"
+            x-transition:leave-start="opacity-100 rotate-0 scale-100"
+            x-transition:leave-end="opacity-0 rotate-90 scale-0"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6 text-violet-300">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0112 21c-5.385 0-9.75-4.365-9.75-9.75 0-4.108 2.544-7.62 6.142-9.062a.75.75 0 01.968.968A7.5 7.5 0 0019.876 13.89a.75.75 0 01.968.968z" />
+        </svg>
+    </button>
+</div>
+
+<!-- Alpine.js script (Make sure x-cloak style is added to your CSS) -->
+<style>
+    [x-cloak] { display: none !important; }
+</style>
+
+<script>
+    function themeSwitcher() {
+        return {
+            theme: "dark",
+            init() {
+                // Check localStorage or System Preference
+                this.theme = localStorage.getItem("theme") || 
+                             (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+                this.apply();
+            },
+            toggle() {
+                this.theme = this.theme === "dark" ? "light" : "dark";
+                this.apply();
+            },
+            apply() {
+                // Toggle 'dark' class on <html>
+                document.documentElement.classList.toggle("dark", this.theme === "dark");
+                localStorage.setItem("theme", this.theme);
+            }
+        }
+    }
+</script>
