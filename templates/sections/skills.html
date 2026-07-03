@@ -25,7 +25,7 @@
     </div>
 
     <!-- 2-columns layout: md = 1/1 , lg = 2/1 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 items-start">
 
       <!-- LEFT: Skills (span 2 on desktop) -->
       <div class="lg:col-span-2">
@@ -117,15 +117,12 @@
               {% if tech.image %}
                 <img src="{{ tech.image.url }}" alt="{{ tech.title }}"
                      class="relative w-5 h-5 object-contain transition-transform duration-300 group-hover:scale-110">
-              {% elif tech.icon %}
-                <i class="{{ tech.icon }} relative text-lg"
-                   style="color: {{ tech.color|default:'#d1d5db' }};"></i>
               {% else %}
                 <span class="relative w-2 h-2 rounded-full"
                       style="background-color: {{ tech.color|default:'#7C3AED' }}; box-shadow: 0 0 12px {{ tech.color|default:'#7C3AED' }}55;"></span>
               {% endif %}
 
-              <span class="relative font-medium text-sm text-gray-400 group-hover:text-gray-200 transition-colors">
+              <span class="relative font-medium text-xs lg:text-sm text-gray-400 group-hover:text-gray-200 transition-colors">
                 {{ tech.title }}
               </span>
             </div>

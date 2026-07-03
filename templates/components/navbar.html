@@ -83,7 +83,7 @@
 
                 <!-- Download CV -->
                 <a
-                    href="/static/files/sajjad-seifi-cv.pdf"
+                    href="{{ profile.resume.url }}"
                     download
                     class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:scale-[1.03] hover:shadow-violet-700/40">
 
@@ -183,7 +183,7 @@
                     {% comment %} {% include "components/theme-switch.html" %} {% endcomment %}
 
                     <a
-                        href="/static/files/sajjad-seifi-cv.pdf"
+                        href="{{ profile.resume.url }}"
                         download
                         class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-violet-900/30">
 

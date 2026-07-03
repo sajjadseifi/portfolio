@@ -25,16 +25,108 @@
 
     <link rel="icon" href="{% static 'icons/favicon.png' %}" />
 
+    <!-- زمان شروع بارگذاری برای محاسبه حداقل ۲ ثانیه نمایش لودینگ -->
+    <script>const loaderStartTime = Date.now();</script>
+
     <!-- Fonts -->
-    <link rel="stylesheet" href="{% static 'fonts/font-face.css' %}" />
+    <link rel="preload" href="{% static 'fonts/font-face.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="{% static 'fonts/font-face.css' %}" /></noscript>
 
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}" />
 
+    <!-- ================= Preloader Vanilla CSS ================= -->
+    <style>
+      #global-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background-color: #f4f4f5; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+      }
+      
+      html.dark #global-loader {
+        background-color: #09090b;
+      }
+      
+      #global-loader.hidden-loader {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      /* استایل کانتینر اصلی لودینگ */
+      .loader-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      /* کانتینر لوگو و حلقه */
+      .loader-logo-container {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* حلقه چرخان بیرونی */
+      .loader-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: #8b5cf6; /* violet-500 */
+        border-bottom-color: #06b6d4; /* cyan-500 */
+        animation: spin-ring 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+      }
+
+      /* حرف S در مرکز */
+      .loader-s {
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(to right, #8b5cf6, #06b6d4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: pulse-s 2s ease-in-out infinite;
+      }
+
+      /* متن لودینگ */
+      .loader-text {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #71717a; /* zinc-500 */
+        letter-spacing: 0.05em;
+        animation: pulse-text 1.5s ease-in-out infinite;
+      }
+
+      /* انیمیشن‌ها */
+      @keyframes spin-ring {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      @keyframes pulse-s {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.7; transform: scale(0.95); }
+      }
+
+      @keyframes pulse-text {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+    </style>
+
+    <!-- Theme Initialization Script -->
     <script>
       ;(function () {
         const theme = localStorage.getItem('theme')
-      
         if (theme) {
           document.documentElement.classList.toggle('dark', theme === 'dark')
         } else {
@@ -42,11 +134,25 @@
         }
       })()
     </script>
+    
     {% block extra_css %}
     {% endblock %}
   </head>
 
   <body class="relative min-h-screen overflow-x-hidden bg-zinc-100 text-zinc-900 transition-colors duration-300 dark:bg-zinc-950 dark:text-zinc-100">
+    
+    <!-- ================= Global Loader ================= -->
+    <div id="global-loader">
+      <div class="loader-content">
+        <div class="loader-logo-container">
+          <div class="loader-ring"></div>
+          <div class="loader-s">S</div>
+        </div>
+        <div class="loader-text">. . . در حال آماده‌سازی</div>
+      </div>
+    </div>
+
+    <!-- Messages -->
     {% if messages %}
       <div class="fixed bottom-6 right-6 z-50 space-y-3">
         {% for message in messages %}
@@ -56,49 +162,62 @@
     {% endif %}
 
     <!-- ================= Background ================= -->
-
     <div class="pointer-events-none fixed inset-0 -z-50 overflow-hidden">
       <div class="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-violet-600/20 blur-[150px]"></div>
-
       <div class="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-[180px]"></div>
     </div>
 
     <!-- ================= Layout ================= -->
-
     <div class="relative flex min-h-screen flex-col">
       <!-- Navbar -->
-
       {% block navbar %}
         {% include 'components/navbar.html' %}
       {% endblock %}
 
       <!-- Main -->
-
       <main class="flex-1">
         {% block content %}
-
         {% endblock %}
       </main>
 
+      <!-- Footer -->
       {% block footer %}
         {% include 'components/footer.html' %}
       {% endblock %}
     </div>
 
     <!-- ================= Scripts ================= -->
+    
+    <!-- Preloader JS -->
+    <script>
+      window.addEventListener('load', function() {
+        // محاسبه زمانی که از لحظه شروع رندر صفحه گذشته است
+        const elapsedTime = Date.now() - loaderStartTime;
+        const minimumWaitTime = 2000; // حداقل 2 ثانیه (2000 میلی‌ثانیه)
+        
+        // اگر کمتر از 2 ثانیه طول کشیده بود، مابقی زمان را صبر می‌کند
+        const remainingWait = Math.max(0, minimumWaitTime - elapsedTime);
 
-    <script src="{% static 'js/jquery.js' %}"></script>
+        setTimeout(() => {
+          const loader = document.getElementById('global-loader');
+          loader.classList.add('hidden-loader');
+          
+          // حذف کامل از DOM پس از اتمام انیمیشن محو شدن
+          setTimeout(() => {
+            loader.style.display = 'none';
+          }, 600); 
+        }, remainingWait);
+      });
+    </script>
 
+    <!-- Deferred JS Libraries & Main Script -->
+    <script defer src="{% static 'js/jquery.js' %}"></script>
     <script defer src="{% static 'js/alpinejs.js' %}"></script>
-
-    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
-
-    <script src="{% static 'js/tailwindcss.js' %}"></script>
-
-    <script src="{% static 'js/main.js' %}"></script>
+    <script defer src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <script defer src="{% static 'js/tailwindcss.js' %}"></script>
+    <script defer src="{% static 'js/main.js' %}"></script>
 
     {% block extra_js %}
-
     {% endblock %}
   </body>
 </html>
